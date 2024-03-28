@@ -16,8 +16,8 @@ class Project(models.Model):
     demo_link = models.CharField(max_length=2000, null=True, blank=True)
     source_link = models.CharField(max_length=2000, null=True, blank=True)
     tags = models.ManyToManyField('Tag', blank=True)
-    vote_total = models.ImageField(default=0)
-    vote_ratio = models.ImageField(default=0)
+    vote_total = models.IntegerField(default=0)
+    vote_ratio = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
