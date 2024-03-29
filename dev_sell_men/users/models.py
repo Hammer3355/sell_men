@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -32,3 +33,8 @@ class Skill(models.Model):
     class Meta:
         verbose_name = 'Навык'
         verbose_name_plural = 'Навыки'
+
+
+
+
+
