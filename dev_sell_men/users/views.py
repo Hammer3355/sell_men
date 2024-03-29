@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Profile
-
+from django.contrib.auth import logout
 
 def profiles(request):
     prof = Profile.objects.all()
@@ -20,3 +20,13 @@ def user_profile(request, pk):
         'other_skill': other_skill
                }
     return render(request, 'users/profile.html', context)
+
+
+def login_user(request):
+    return render(request, 'users/login_register.html')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
