@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Profile
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 def profiles(request):
     prof = Profile.objects.all()
@@ -23,10 +25,33 @@ def user_profile(request, pk):
 
 
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('profiles')
+
+    if request.method == 'POST':
+        username = request.POST['username'].lower()
+        password = request.POST['password']
+
+        try:
+            user = User.objects.get(username=username)
+        except ObjectDoesNotExist:
+            print('Пользователь не существует')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('profiles')
+        else:
+            print('Имя или пароль неверны')
+
     return render(request, 'users/login_register.html')
 
 
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+
 
