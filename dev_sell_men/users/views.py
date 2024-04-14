@@ -4,8 +4,8 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 def profiles(request):
@@ -24,7 +24,7 @@ def user_profile(request, pk):
         'profile': prof,
         'top_skill': top_skill,
         'other_skill': other_skill
-               }
+    }
     return render(request, 'users/profile.html', context)
 
 
@@ -79,3 +79,14 @@ def register_user(request):
     return render(request, 'users/login_register.html', context)
 
 
+@login_required(login_url='login')
+def user_account(request):
+    prof = request.user.profile
+    skills = prof.skill_set.all()
+    projects = prof.project_set.all()
+    context = {
+        'profile': prof,
+        'skills': skills,
+        'projects': projects
+    }
+    return render(request, 'users/account.html', context)

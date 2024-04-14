@@ -1,0 +1,104 @@
+{% extends 'projects/base.html' %}
+{% block content %}
+
+
+  <!-- Main Section -->
+  <main class="settingsPage profile my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
+              <img class="avatar avatar--xl dev__avatar" src="{{ profile.profile_image.url }}" />
+              <h2 class="dev__name">{{ profile.name }}</h2>
+              <p class="dev__title">{{ profile.short_intro }}</p>
+              <ul class="dev__social">
+	              {% if profile.social_telegram %}
+                <li>
+                  <a title="Telegram" href="{{ profile.social_telegram }}" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906q-1.168.486-4.666 2.01-.567.225-.595.442c-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294q.39.01.868-.32 3.269-2.206 3.374-2.23c.05-.012.12-.026.166.016s.042.12.037.141c-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8 8 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629q.14.092.27.187c.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.4 1.4 0 0 0-.013-.315.34.34 0 0 0-.114-.217.53.53 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09"/>
+</svg></a>
+                </li>
+	              {% endif %}
+	              {% if profile.social_vk %}
+                <li>
+                  <a title="Vk" href="{{ profile.social_vk }}" target="_blank"><img alt="svgImg" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA0MCA0MCI+CjxwYXRoIGZpbGw9IiM4YmI3ZjAiIGQ9Ik0yMCwxQzkuNTA3LDEsMSw5LjUwNywxLDIwczguNTA3LDE5LDE5LDE5czE5LTguNTA3LDE5LTE5UzMwLjQ5MywxLDIwLDF6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzRlN2FiNSIgZD0iTTIwLDJjOS45MjUsMCwxOCw4LjA3NSwxOCwxOHMtOC4wNzUsMTgtMTgsMThTMiwyOS45MjUsMiwyMFMxMC4wNzUsMiwyMCwyIE0yMCwxCUM5LjUwNywxLDEsOS41MDcsMSwyMHM4LjUwNywxOSwxOSwxOXMxOS04LjUwNywxOS0xOVMzMC40OTMsMSwyMCwxTDIwLDF6Ij48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTMwLjkzNywxNC4wNDFjMC4wNDYtMC4xNTEsMC4wNjgtMC4yOTEsMC4wNjItMC40MTZDMzAuOTg0LDEzLjI2MywzMC43MzUsMTMsMzAuMTQ5LDEzaC0yLjYxOAljLTAuNjYxLDAtMC45NjYsMC40LTEuMTQ0LDAuODAxYzAsMC0xLjYzMiwzLjM1OS0zLjUxMyw1LjU3NGMtMC42MSwwLjY0MS0wLjkyLDAuNjI1LTEuMjUsMC42MjVDMjEuNDQ3LDIwLDIxLDE5Ljc4NiwyMSwxOS4xOTkJdi01LjE4NUMyMSwxMy4zMiwyMC44MjcsMTMsMjAuMjY4LDEzaC00LjY0OUMxNS4yMTIsMTMsMTUsMTMuMzIsMTUsMTMuNjQxYzAsMC42NjcsMC44OTgsMC44MjcsMSwyLjY5NnYzLjYyMwljMCwwLjg4LTAuMTUzLDEuMDQtMC40ODMsMS4wNGMtMC44OSwwLTIuNjQyLTMtMy44MTUtNi45MzJDMTEuNDQ4LDEzLjI5NCwxMS4xOTQsMTMsMTAuNTMzLDEzSDcuODlDNy4xMjcsMTMsNywxMy4zNzQsNywxMy43NzQJYzAsMC43MjEsMC42LDQuNjE5LDMuODc1LDkuMTAxQzEzLjI1LDI2LjEyNSwxNi4zNzksMjgsMTkuMTQ5LDI4YzEuNjc4LDAsMS44NS0wLjQyNywxLjg1LTEuMDk0di0yLjk3MglDMjEsMjMuMTMzLDIxLjE4MywyMywyMS43MTcsMjNjMC4zODEsMCwxLjE1OCwwLjI1LDIuNjU4LDJjMS43MywyLjAxOCwyLjA0NCwzLDMuMDM2LDNoMi42MThjMC42MDgsMCwwLjk1Ny0wLjI1NSwwLjk3MS0wLjc1CWMwLjAwMy0wLjEyNi0wLjAxNS0wLjI2Ny0wLjA1Ni0wLjQyNEMzMC43NSwyNi4yNSwyOS44NiwyNC44NDIsMjguNzUsMjMuNWMtMC42MTUtMC43NDMtMS4yMjItMS40NzktMS41MDEtMS44NzkJQzI3LjA2MiwyMS4zNiwyNi45OTEsMjEuMTc2LDI3LDIxYzAuMDA5LTAuMTg1LDAuMTA1LTAuMzYxLDAuMjQ5LTAuNjA3QzI3LjIyMywyMC4zOTMsMzAuNjA3LDE1LjY0MiwzMC45MzcsMTQuMDQxeiI+PC9wYXRoPgo8L3N2Zz4="/></a>
+                </li>
+	              {% endif %}
+	              {% if profile.social_ytube %}
+                <li>
+                  <a title="Youtube" href="{{ profile.social_ytube }}" target="_blank"><i class="fa fa-youtube"></i></a>
+                </li>
+	              {% endif %}
+	              {% if profile.social_website %}
+                <li>
+                  <a title="Personal Website" href="{{ profile.social_website }}" target="_blank"><i class="fa fa-sitemap"></i></a>
+                </li>
+	              {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">About Me</h3>
+            <p class="devInfo__about">
+              {{ profile.bio }}
+            </p>
+          </div>
+          <div class="settings">
+            <h3 class="settings__title">Skills</h3>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="im im-plus"></i> Add Skill</a>
+          </div>
+
+          <table class="settings__table">
+	          {% for skill in skills %}
+            <tr>
+              <td class="settings__tableInfo">
+                <h4>{{ skill.name }}</h4>
+                <p>
+                  {{  skill.description }}
+                </p>
+              </td>
+              <td class="settings__tableActions">
+                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
+                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
+                  Delete</a>
+              </td>
+            </tr>
+	          {% endfor %}
+          </table>
+
+          <div class="settings">
+            <h3 class="settings__title">Projects</h3>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="im im-plus"></i> Add Project</a>
+          </div>
+
+          <table class="settings__table">
+	          {% for project in profile.project_set.all %}
+            <tr>
+              <td class="settings__thumbnail">
+                <a href="{% url 'project' project.id %}"><img src="{{ project.featured_image.url }}" alt="Project Thumbnail" /></a>
+              </td>
+              <td class="settings__tableInfo">
+                <a href="single-project.html">{{ project.title }}</a>
+                <p>
+                  {{ project.description|slice:":140" }}
+                </p>
+              </td>
+              <td class="settings__tableActions">
+                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
+                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
+                  Delete</a>
+              </td>
+            </tr>
+	          {% endfor %}
+            
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}

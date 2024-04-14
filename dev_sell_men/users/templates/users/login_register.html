@@ -19,6 +19,11 @@
           <div class="form__field">
             <label for="formInput#text">{{  field.label }}</label>
             {{ field }}
+	          
+	          {% for error in field.errors %}
+	            <p style="color: red">{{ error }}</p>
+	          {% endfor %}
+	          
           </div>
 	        {% endfor %}
 
