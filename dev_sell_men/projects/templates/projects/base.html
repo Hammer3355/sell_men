@@ -21,7 +21,20 @@
 <body>
 
 {% include 'projects/navbar.html' %}
+	{% if messages %}
+		{% for messages in messages %}
+	    <div style="text-align: center">
+		    <div class="alert alert--{{ messages.tags }}">
+			    <p class="alert__message">{{ messages }}</p>
+			    <button class="alert__close">&times;</button>
+			   
+		    </div>
+	    </div>
+		{% endfor %}
+	{% endif %}
 {% block content %} {% endblock %}
+
+<script src="{% static 'uikit/app.js' %}"></script>
 
 </body>
 </html>

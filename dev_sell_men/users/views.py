@@ -3,6 +3,10 @@ from .models import Profile
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
+
 
 def profiles(request):
     prof = Profile.objects.all()
@@ -35,7 +39,7 @@ def login_user(request):
         try:
             user = User.objects.get(username=username)
         except ObjectDoesNotExist:
-            print('Пользователь не существует')
+            messages.error(request, 'Пользователь не существует')
 
         user = authenticate(request, username=username, password=password)
 
@@ -43,15 +47,35 @@ def login_user(request):
             login(request, user)
             return redirect('profiles')
         else:
-            print('Имя или пароль неверны')
+            messages.error(request, 'Имя или пароль неверны')
 
     return render(request, 'users/login_register.html')
 
 
 def logout_user(request):
     logout(request)
+    messages.info(request, 'Вы вышли из аккаунта')
     return redirect('login')
 
 
+def register_user(request):
+    page = 'register'
+    form = CustomUserCreationForm()
+
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+
+            messages.success(request, 'Аккаунт был создан!')
+            login(request, user)
+            return redirect('profiles')
+        else:
+            messages.error(request, 'Произошла ошибка, попробуйте ещё раз')
+
+    context = {'page': page, 'form': form}
+    return render(request, 'users/login_register.html', context)
 
 

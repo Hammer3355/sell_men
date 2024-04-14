@@ -5,3 +5,4 @@ if (alertWrapper) {
   alertClose.addEventListener('click', () => 
     alertWrapper.style.display = 'none'
 )}
+
