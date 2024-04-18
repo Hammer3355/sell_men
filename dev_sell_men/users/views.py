@@ -8,7 +8,6 @@ from .forms import CustomUserCreationForm, ProfileForm, SkillForm
 from django.contrib.auth.decorators import login_required
 
 
-
 def profiles(request):
     prof = Profile.objects.all()
     context = {'profiles': prof}
@@ -104,14 +103,40 @@ def edit_account(request):
             form.save()
             return redirect('account')
 
-
     context = {'form': form}
     return render(request, 'users/profile_form.html', context)
 
 
 @login_required(login_url='login')
 def create_skill(request):
+    profile = request.user.profile
     form = SkillForm()
+
+    if request.method == 'POST':
+        form = SkillForm(request.POST)
+        if form.is_valid():
+            skill = form.save(commit=False)
+            skill.owner = profile
+            skill.save()
+            messages.success(request, 'Навок был добавлен!')
+            return redirect('account')
+
     context = {'form': form}
     return render(request, 'users/skill_form.html', context)
 
+
+@login_required(login_url='login')
+def update_skill(request, pk):
+    profile = request.user.profile
+    skill = profile.skill_set.get(id=pk)
+    form = SkillForm(instance=skill)
+
+    if request.method == 'POST':
+        form = SkillForm(request.POST, instance=skill)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Навок был обновлен успешно!')
+            return redirect('account')
+
+    context = {'form': form}
+    return render(request, 'users/skill_form.html', context)
