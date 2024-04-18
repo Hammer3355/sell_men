@@ -6,19 +6,19 @@
     <section class="hero-section text-center">
       <div class="container container--narrow">
         <div class="hero-section__box">
-          <h2>CONNECT WITH <span>DEVELOPERS</span></h2>
-          <h2>FROM AROUND THE WORLD</h2>
+          <h2>ОБЩАЙТЕСЬ С  <span>МЕНЕДЖЕРАМИ</span></h2>
+          <h2>МАРКЕТПЛЕЙСОВ НА ПРЯМУЮ</h2>
         </div>
 
         <div class="hero-section__search">
-          <form class="form" action="#" method="get">
+          <form class="form" action="{% url 'profiles' %}" method="get">
             <div class="form__field">
-              <label for="formInput#search">Search Developers </label>
-              <input class="input input--text" id="formInput#search" type="text" name="text"
-                placeholder="Search by developer name" />
+              <label for="formInput#search">Поиск менеджера </label>
+              <input class="input input--text" id="formInput#search" type="text" name="search_query" value="{{ search_query }}"
+                placeholder="Поиск по сайту" />
             </div>
 
-            <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+            <input class="btn btn--sub btn--lg" type="submit" value="Поиск" />
           </form>
         </div>
       </div>
