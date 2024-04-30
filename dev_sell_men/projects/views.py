@@ -1,18 +1,18 @@
 from django.shortcuts import render, redirect
-from .models import Project, Tag
+from .models import Project
 from .forms import ProjectForm
 from django.contrib.auth.decorators import login_required
+from .utils import search_project
 
 
 def projects(request):
-    pr = Project.objects.all()
-    context = {'projects': pr}
+    pr, search_query = search_project(request)
+    context = {'projects': pr, 'search_query': search_query}
     return render(request, 'projects/projects.html', context)
 
 
 def project(request, pk):
     project_obj = Project.objects.get(id=pk)
-    # pr = Project.objects.get(id=pk)
     context = {'project': project_obj}
     return render(request, 'projects/single-project.html', context)
 
