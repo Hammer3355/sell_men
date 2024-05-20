@@ -3,3 +3,4 @@ sqlparse==0.4.4
 django==4.2
 typing_extensions==4.7.1
 tzdata==2023.3
+pillow==10.3.0

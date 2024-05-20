@@ -11,10 +11,18 @@
                 <form class="form" method="POST" enctype="multipart/form-data">
 	                {% csrf_token %}
 	                {% for field in form %}
+                    {% if field.label == 'Tags' %}
                     <div class="form__field">
                         <label for="formInput#text">{{ field.label }}</label>
 	                    {{ field }}
+                        <input type="text" name="new_tags" placeholder="Введите тег">
                     </div>
+                    {% else %}
+                    <div class="form_field">
+                        <label>{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                    {% endif %}
 	                {% endfor %}
                     
                     <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
